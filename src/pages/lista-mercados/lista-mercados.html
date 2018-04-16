@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        Mercados
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+  <ion-content class="outer-content">
+      <ion-searchbar (ionInput)="pesquisarMercados($event)"></ion-searchbar>
+      <ion-list [virtualScroll]="mercados">
+        <ion-item-sliding *virtualItem="let mercado">
+          <ion-item (click)="visualizarMercado(mercado)">
+            <ion-thumbnail item-start>
+                <img [src]="mercado.foto" class="img-bordas">
+            </ion-thumbnail>
+            <mercado-lista-item [mercado]="mercado"></mercado-lista-item>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+  </ion-content>

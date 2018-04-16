@@ -1,0 +1,80 @@
+<!--
+  Generated template for the CadastroProdutoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <ion-title>Produto</ion-title>
+      <ion-buttons start *ngIf="usuario.isMercado">
+        <button ion-button icon-only (click)="limparCampos()">
+          <ion-icon name="trash-outline"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="scanBarCodeZBar()"> 
+          <ion-icon name='barcode-outline'></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+      
+  
+      <ion-content padding>
+        <div *ngIf="usuario.isMercado">
+          <form [formGroup]="produtoForm">
+            <ion-card>
+              <ion-card-content (click)="tirarFoto()">
+                <img [src]="produto.foto"  class="img-bordas"/>
+              </ion-card-content>
+            </ion-card>      
+            <ion-list>
+              <ion-item>
+                <ion-label color="primary" floating>Código de Barra</ion-label>
+                <ion-input name="barCode" type="tel" [readonly]="isReadonly" [(ngModel)]="produto.plu" [disabled]="!usuario.isMercado" formControlName="barCode" clearInput></ion-input>
+              </ion-item>   
+              <ion-item>
+                  <ion-label color="primary" floating>Marca</ion-label>
+                  <ion-input name="marca" type="text" [(ngModel)]="produto.marca" [disabled]="!usuario.isMercado" formControlName="marca" clearInput></ion-input>
+                </ion-item>
+              <ion-item>
+                <ion-label color="primary" floating>Nome</ion-label>
+                <ion-input name="nome" type="text" [(ngModel)]="produto.nome" [disabled]="!usuario.isMercado" formControlName="nome" clearInput></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label color="primary" floating>Descrição</ion-label>
+                <ion-input name="desc" type="text" [(ngModel)]="produto.desc" [disabled]="!usuario.isMercado" formControlName="desc" clearInput></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label color="primary" floating>Valor (R$)</ion-label>
+                <ion-input name="preco" type="tel" [(ngModel)]="produto.preco" [disabled]="!usuario.isMercado" [brmasker]="{money: true}" formControlName="preco" clearInput></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-toggle name="isPromocao" checked="false" [(ngModel)]="produto.isPromocao" [disabled]="!usuario.isMercado" formControlName="isPromocao"></ion-toggle>
+                  <ion-label color="primary">
+                    Promoção
+                  </ion-label>
+              </ion-item>
+            </ion-list>
+            <button ion-button full round (click)="salvarProduto()" [disabled]="produtoForm.invalid" *ngIf="usuario.isMercado">Salvar</button>
+          </form>
+        </div>
+        <div>
+          <ion-list [virtualScroll]="produtos" *ngIf="!usuario.isMercado" class="list card animated bounceInLeft">
+            <ion-item-sliding *virtualItem="let produto">
+              <ion-item (click)="visualizarMercado(produto)">
+                <ion-thumbnail item-start>
+                    <img [src]="produto.mercado.foto" class="img-bordas-avatar">
+                </ion-thumbnail>
+                <produto-mercado-lista [produto]="produto"></produto-mercado-lista>
+              </ion-item>
+              <ion-item-options side="right">
+                <button ion-button red icon-only color="danger" (click)="removerProduto(produto)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+            </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </div>
+      </ion-content>

@@ -1,0 +1,30 @@
+<ion-content class="backgroundColor" >
+
+  <div class="pad-img-logo" align="center" class="animated bounceInUp">
+    <img src="assets/imgs/meuMercadoImg.png" padding-right="20" >
+  </div>
+
+  <form [formGroup]="loginForm" class="animated bounceInUp">
+    <ion-list no-border>
+
+      <ion-item class="backgroundColor" no-border>
+        <ion-label color="light" floating>E-mail</ion-label>
+        <ion-input type="email" formControlName="email" [(ngModel)]="credential.email" name="email" clearInput></ion-input>
+      </ion-item>
+
+      <ion-item class="backgroundColor">
+          <ion-label color="light" floating>Senha</ion-label>
+        <ion-input type="tel" style="-webkit-text-security:disc" formControlName="senha" [(ngModel)]="credential.senha" name="senha" clearInput></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="pad-botoes-login" align="center">
+      <button ion-button round type="input" color="light" (click)="logarComEmail()" [disabled]="loginForm.invalid" class="botao-grande">Entrar</button>
+      <!-- <button ion-button round type="input" (click)="logarFacebook()" class="botao-grande">Logar Com Facebook</button>
+      <button ion-button round type="input" (click)="logarComGoogle()" class="botao-grande">Logar Com Google</button> -->
+      <button ion-button round outline type="input" color="light" (click)="registrar() ">Registre-se</button>
+    </div>
+    
+  </form>
+</ion-content>

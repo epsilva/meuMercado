@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-navbar color="mercado" hideBackButton>
+        <ion-buttons left class="animated zoomIn">
+          <button ion-button navPop icon-only>
+            <ion-icon ios="ios-arrow-dropleft" md="md-arrow-dropleft"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-navbar>
+  </ion-header>
+
+<ion-content class="backgroundColor" align="center">
+  <div class="animated zoomIn">
+    <img src="assets/imgs/meuMercadoImg.png" padding-left="20"/>
+  </div>
+
+  <form [formGroup]="registerForm" class="animated zoomIn">
+    <ion-list no-border>
+      <ion-item class="backgroundColor">
+        <ion-label  color="light" floating>Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="credential.nome" formControlName="nome" name="nome" clearInput></ion-input>
+      </ion-item>
+
+      <ion-item class="backgroundColor">
+        <ion-label color="light" floating>E-mail</ion-label>
+        <ion-input type="email" [(ngModel)]="credential.email" formControlName="email" name="email" clearInput></ion-input>
+      </ion-item>
+
+      <ion-item class="backgroundColor">
+        <ion-label color="light" floating>Senha</ion-label>
+        <ion-input type="tel" style="-webkit-text-security:disc" formControlName="senha" name="senha" [(ngModel)]="credential.senha" clearInput></ion-input>
+      </ion-item>
+
+      <ion-list no-border>
+        <ion-item class="backgroundColor">
+          <ion-toggle checked="false" [(ngModel)]="toggle" formControlName="toogle" name="toogle"></ion-toggle>
+          <ion-label color="light">
+            Supermercado
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-list no-border>
+        <ion-list-header class="backgroundColor animated zoomIn" *ngIf="toggle">
+            <ion-label color="light">Meu Mercado</ion-label>
+        </ion-list-header>
+        <ion-item class="backgroundColor animated bounceInRight" *ngIf="toggle">
+          <ion-label color="light" floating>CNPJ</ion-label>
+          <ion-input type="tel" [(ngModel)]="mercado.cnpj" [brmasker]="{mask:'00.000.000/0000-00', len:18}" formControlName="cnpj" name="cnpj" clearInput></ion-input>
+        </ion-item>
+      
+        <ion-item class="backgroundColor animated bounceInLeft" *ngIf="toggle">
+          <ion-label color="light" floating>Razão Social</ion-label>
+          <ion-input type="text" [(ngModel)]="mercado.razaoSocial" formControlName="razaoSocial" name="razaoSocial" clearInput></ion-input>
+        </ion-item>
+
+        <ion-item class="backgroundColor animated bounceInRight" *ngIf="toggle"> 
+          <ion-label color="light" floating>Nome Mercado</ion-label>
+          <ion-input type="text" [(ngModel)]="mercado.nomeMercado" formControlName="nomeMercado" name="nomeMercado" clearInput></ion-input>
+        </ion-item>
+    </ion-list>
+
+    </ion-list>
+  </form>
+
+  <div class="pad-botoes-login" class="animated zoomIn" align="center">
+    <button ion-button round type="input" color="light" (click)="registrar()" [disabled]="registerForm.invalid" class="botao-grande">Registrar</button>
+  </div>
+</ion-content>

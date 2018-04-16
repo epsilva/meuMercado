@@ -5,13 +5,57 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+    <ion-list>
+        <ion-item>
+          <ion-label>Select an effect</ion-label>
+          <ion-select
+             [(ngModel)]="effect"
+             (ionChange)="applyClassBySelection($event, effect)">
+             <ion-option value="shake">Shake</ion-option>
+             <ion-option value="bounce">Bounce</ion-option>
+             <ion-option value="jello">Jello</ion-option>
+             <ion-option value="lightSpeedIn">Light Speed In</ion-option>
+             <ion-option value="flip">Flip</ion-option>
+             <ion-option value="swing">Swing</ion-option>
+             <ion-option value="hinge">Hinge</ion-option>
+          </ion-select>
+        </ion-item>
+     </ion-list>
+   
+   
+     <ion-item
+        [ngClass]="cssClass"
+        text-wrap>
+   
+        <h2>Heading</h2>
+   
+        <p>
+           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam feugiat congue sapien, ac tristique massa pharetra eget. Aenean urna mauris, dapibus quis ante vel, mattis hendrerit massa. Vivamus posuere blandit semper. Fusce faucibus luctus neque, vel pulvinar risus consectetur quis. Nullam mollis, elit non malesuada congue, ligula ex maximus metus, sit amet bibendum massa dui dignissim risus. Etiam et diam arcu. Etiam volutpat purus ac metus dignissim, ut scelerisque sem luctus. Suspendisse gravida lectus orci, at aliquam tortor tincidunt ac. Quisque pretium egestas orci, sit amet iaculis sem vestibulum quis. Integer a ex ut tortor bibendum mollis. Nam auctor est a venenatis ultricies.
+        </p>
+   
+     </ion-item>
+  <!--div class="list card animated bounceInLeft">  
+    <div class="item item-divider">Recent Updates</div>
+    <div class="item item-body">
+      <div>
+        There is a fire in <b>sector 3</b>
+      </div>
+    </div>
+  </div>  
+  <div class="list card animated bounceInRight">  
+    <div class="item item-divider">Health</div>
+    <div class="item item-body">
+      <div>
+        You ate an apple today!
+      </div>
+    </div>
+  </div>  
+  <div class="list card animated infinite tada">  
+    <div class="item item-divider">Upcoming</div>
+    <div class="item item-body">
+      <div>
+        You have <b>29</b> meetings on your calendar tomorrow.
+      </div>
+    </div>
+  </div-->  
 </ion-content>

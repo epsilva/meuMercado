@@ -1,0 +1,26 @@
+page-lista-produtos {
+
+    .item-avatar  {     
+        margin: auto;
+        width: 3vw;
+        height: 8vw;
+        border-radius: 100%; // half for rounding */
+        object-fit: initial; /* Scale the image - Center and crop image*/
+        object-position: center; /* Center the image within the element - Center and crop image*/
+        border: 1vw solid #000000;  
+    }
+
+    .img-bordas  {     
+        border-radius: 26px;
+    }
+
+    .chat-item.ng-enter {
+        -webkit-animation-delay:5s;
+  animation-delay:5s;
+
+  /* override to make sure it's not inherited from other styles */
+  //-webkit-animation-duration:0;
+  //animation-duration:0;
+    }
+
+}
