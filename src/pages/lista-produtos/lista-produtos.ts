@@ -40,7 +40,7 @@ export class ListaProdutosPage {
     this.loadEvent();
     console.log("ionViewWillLoad");
     let loader = this.loadingController.create({
-      content: "Pesquisando produtos!"
+      cssClass: 'transparent'
     }); 
     loader.present().then(() => {
       let mercado:Mercado = new Mercado();

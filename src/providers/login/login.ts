@@ -55,7 +55,7 @@ export class LoginProvider {
 
   loginWithCredential(credential: Credential, mercado: Mercado, isMercado: boolean) {
     let loader = this.loadingController.create({
-      content: "Autenticando usuário!"
+      cssClass: 'transparent'
     }); 
     loader.present().then(() => {
       if (!(credential.email == undefined && credential.senha == undefined)) {   
@@ -107,7 +107,7 @@ export class LoginProvider {
 
   registrar(credential: Credential, mercado: Mercado, isMercado: boolean) {
     let loader = this.loadingController.create({
-      content: "Registrando usuário!"
+      cssClass: 'transparent'
     }); 
     loader.present().then(() => {
       let usuario: Usuario = new Usuario();

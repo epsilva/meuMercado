@@ -25,6 +25,7 @@ export class RegisterPage {
   registerForm:FormGroup;
   effect : any;
   cssClass : string;
+  isMostrarMercado: boolean = false;
 
   constructor(public formBuilder:FormBuilder, public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider) {
     this.credential = new Credential();
@@ -47,6 +48,18 @@ export class RegisterPage {
       this.mercado.email = this.credential.email;
     }
     this.loginProvider.registrar(this.credential, this.mercado, this.toggle);
+  }
+
+  isSupermercado(){
+    if(this.toggle){
+      this.isMostrarMercado = !this.isMostrarMercado;
+      this.cssClass = "animated " + "bounceInLeft";
+    }else{
+      setTimeout(() => {
+        this.isMostrarMercado = !this.isMostrarMercado;
+      }, 650);
+      this.cssClass = "animated " + "bounceOutRight";
+    }
   }
 
   voltarLogin(){

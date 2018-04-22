@@ -45,7 +45,7 @@ export class LoginPage {
   ionViewDidLoad() {
     firebase.auth().onAuthStateChanged((user) => {
       let loader = this.loadingController.create({
-        content: "Recuperando informações!"
+        cssClass: 'transparent'
       }); 
       if (!(!user)) {
         loader.present().then(() => {

@@ -31,7 +31,7 @@ export class ConfiguracaoPage {
 
   sair(){
     let loader = this.loadingController.create({
-      content: "Saindo!"
+      cssClass: 'transparent'
     }); 
     loader.present().then(() => {
       this.loginProvider.exit().then(sucess => {
@@ -68,7 +68,7 @@ export class ConfiguracaoPage {
     const imageRef = storageRef.child('images/users/'+filename+'.jpg');
 
     let loader = this.loadingController.create({
-      content: "Carregando imagem!"
+      cssClass: 'transparent'
     }); 
     loader.present().then(() => {
       imageRef.putString(this.imageSrc, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {

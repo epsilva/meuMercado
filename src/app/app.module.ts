@@ -34,6 +34,8 @@ import { ListaMercadosPage } from '../pages/lista-mercados/lista-mercados';
 import { ProdutoMercadoListaComponent } from '../components/produto-mercado-lista/produto-mercado-lista';
 //import { AnimationService, AnimatesDirective } from 'css-animation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CadastroListaComprasPage } from '../pages/cadastro-lista-compras/cadastro-lista-compras';
+import { ScrollHide } from './../components/scroll-hide/scroll-hide';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyB7TS7Mk9TKW6j4b-4AoKMsmu3e5LPtlw0",
@@ -59,7 +61,9 @@ export const firebaseConfig = {
     ProdutoListaItemComponenteComponent,
     MercadoListaItemComponent,
     ProdutoMercadoListaComponent,
-    ListaMercadosPage
+    ListaMercadosPage,
+    CadastroListaComprasPage,
+    ScrollHide
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,8 @@ export const firebaseConfig = {
     HomePage,
     TabsPage,
     ListaProdutosPage,
-    ListaMercadosPage
+    ListaMercadosPage,
+    CadastroListaComprasPage
   ],
   providers: [
     StatusBar,

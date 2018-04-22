@@ -5,6 +5,7 @@ import { Produto } from '../../models/produto';
 import firebase from 'firebase';
 import { LoginProvider } from '../login/login';
 import { Usuario } from '../../models/usuario';
+import { Mercado } from '../../models/mercado';
 
 /*
   Generated class for the DataServiceProvider provider.
@@ -39,31 +40,16 @@ export class DataServiceProvider {
   }
 
   registrar(produto: Produto) {
-    return firebase.database().ref('/usuario/' + this.loginProvider.currentUser.id).once("value", (snapshot) => {
-      let refKeyProduto;
-
-      if(produto.id !== undefined){
-        refKeyProduto = produto.id;
-      }else{
-        refKeyProduto = this.referenceProduto.push().key;
-        produto.id = refKeyProduto;
-      }
-      this.referenceProduto.child(refKeyProduto).update(produto);
-
-      this.usuario = snapshot.val();
-      this.reference.child(this.usuario.id + '/' + produto.plu).update(produto);
-      
-      //this.referenceProduto.child(produto.id).update(produto);
-       
-      
-      /*else {
-        // insert
-        //produto.idMercado = this.loginProvider.currentUser.id;
-       // this.reference.ref(this.usuario.id + '/' + produto.plu).set(produto);
-        //this.referenceProduto.ref.set(produto);
-      }*/
-        
+    let mercado:Mercado = this.loginProvider.currentUser;
+    mercado.produtos = new Array<Produto>();
+    this.reference.child(this.loginProvider.currentUser.id + '/' + produto.plu).update(produto);
+    this.referenceProduto = firebase.database().ref("/produto-geral/"+mercado.id+"/");
+    return firebase.database().ref('/produto/' + this.loginProvider.currentUser.id).once("value", (snapshot) => {
+      snapshot.val().forEach(element => {
+        mercado.produtos.push(element);
       });
+      this.referenceProduto.update(mercado);
+    });
   }
 
   recuperarProduto(produto:Produto){

@@ -7,7 +7,7 @@ export class Produto{
     nome:String;
     preco:String;
     desc:String;
-    mercado:Mercado = new Mercado();
+    //mercado:Mercado = new Mercado();
     isPromocao:boolean = true;
-    foto:string = "assets/imgs/placeholderCamera.png";
+    foto:string = "assets/imgs/finiTubes.png";
 }

@@ -1,12 +1,12 @@
 <ion-header>
-    <ion-navbar color="mercado" hideBackButton>
-        <ion-buttons left class="animated zoomIn">
-          <button ion-button navPop icon-only>
-            <ion-icon ios="ios-arrow-dropleft" md="md-arrow-dropleft"></ion-icon>
-          </button>
-        </ion-buttons>
-      </ion-navbar>
-  </ion-header>
+  <ion-navbar color="mercado" hideBackButton>
+    <ion-buttons>
+      <button ion-button navPop icon-only>
+        <ion-icon ios="ios-arrow-dropleft" md="md-arrow-dropleft"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content class="backgroundColor" align="center">
   <div class="animated zoomIn">
@@ -32,27 +32,27 @@
 
       <ion-list no-border>
         <ion-item class="backgroundColor">
-          <ion-toggle checked="false" [(ngModel)]="toggle" formControlName="toogle" name="toogle"></ion-toggle>
+          <ion-toggle checked="false" [(ngModel)]="toggle" formControlName="toogle" name="toogle" (ionChange)="isSupermercado()"></ion-toggle>
           <ion-label color="light">
             Supermercado
           </ion-label>
         </ion-item>
       </ion-list>
-      <ion-list no-border>
-        <ion-list-header class="backgroundColor animated zoomIn" *ngIf="toggle">
+      <ion-list no-border *ngIf="isMostrarMercado" [ngClass]="cssClass">
+        <ion-list-header class="backgroundColor animated zoomIn">
             <ion-label color="light">Meu Mercado</ion-label>
         </ion-list-header>
-        <ion-item class="backgroundColor animated bounceInRight" *ngIf="toggle">
+        <ion-item class="backgroundColor">
           <ion-label color="light" floating>CNPJ</ion-label>
           <ion-input type="tel" [(ngModel)]="mercado.cnpj" [brmasker]="{mask:'00.000.000/0000-00', len:18}" formControlName="cnpj" name="cnpj" clearInput></ion-input>
         </ion-item>
       
-        <ion-item class="backgroundColor animated bounceInLeft" *ngIf="toggle">
+        <ion-item class="backgroundColor">
           <ion-label color="light" floating>Razão Social</ion-label>
           <ion-input type="text" [(ngModel)]="mercado.razaoSocial" formControlName="razaoSocial" name="razaoSocial" clearInput></ion-input>
         </ion-item>
 
-        <ion-item class="backgroundColor animated bounceInRight" *ngIf="toggle"> 
+        <ion-item class="backgroundColor"> 
           <ion-label color="light" floating>Nome Mercado</ion-label>
           <ion-input type="text" [(ngModel)]="mercado.nomeMercado" formControlName="nomeMercado" name="nomeMercado" clearInput></ion-input>
         </ion-item>

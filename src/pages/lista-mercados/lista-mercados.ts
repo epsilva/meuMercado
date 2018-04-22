@@ -33,7 +33,7 @@ export class ListaMercadosPage {
   ionViewWillLoad() {
     console.log('ionViewWillLoad ListaMercadosPage');
     let loader = this.loadingController.create({
-      content: "Pesquisando mercados!"
+      cssClass: 'transparent'
     }); 
     loader.present().then(() => {
       this.mercadoProvider.reference.on('value', (snapshot) => {

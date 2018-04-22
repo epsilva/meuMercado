@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+      <ion-title>
+        Cadastro de Lista de Compras
+      </ion-title>
+    <ion-buttons>
+      <button ion-button navPop icon-only>
+        <ion-icon ios="ios-arrow-dropleft" md="md-arrow-dropleft"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list-header>
+    Produtos
+  </ion-list-header>
+  <ion-list>
+      <div *ngFor="let itemGrp of mercados">
+
+        <div class="item item-divider">
+          {{itemGrp.nome}}
+        </div>                                                           
+
+      <ion-item *ngFor="let item of itemGrp.produtos">
+         {{ item }}
+          <span class="item-note">
+          some value
+          </span>
+      </ion-item>
+
+      </div>
+
+    </ion-list>
+</ion-content>

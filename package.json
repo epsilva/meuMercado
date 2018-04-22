@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "5.2.9",
     "@ionic-native/barcode-scanner": "^4.6.0",
     "@ionic-native/core": "4.6.0",
+    "@ionic-native/crop": "^4.7.0",
+    "@ionic-native/image-picker": "^4.7.0",
     "@ionic-native/splash-screen": "4.6.0",
     "@ionic-native/status-bar": "4.6.0",
     "@ionic-native/toast": "^4.6.0",
@@ -30,18 +32,22 @@
     "angularfire2": "^5.0.0-rc.6",
     "animate.css": "^3.6.1",
     "brmasker-ionic-3": "^1.0.9",
+    "com.synconset.imagepicker": "~2.1.10",
     "cordova-plugin-camera": "^4.0.2",
+    "cordova-plugin-crop": "^0.4.0",
     "cordova-plugin-cszbar": "^1.3.2",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.19",
     "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-telerik-imagepicker": "^2.1.10",
     "cordova-plugin-whitelist": "^1.3.3",
     "cordova-plugin-x-toast": "^2.6.2",
     "css-animation": "^1.4.1",
     "firebase": "^4.12.1",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
+    "jquery": "^3.3.1",
     "phonegap-plugin-barcodescanner": "^7.1.0",
     "rxjs": "5.5.8",
     "sw-toolbox": "3.6.0",
@@ -70,8 +76,14 @@
       "cordova-plugin-cszbar": {
         "CAMERA_USAGE_DESCRIPTION": "",
         "PHOTOLIBRARY_USAGE_DESCRIPTION": ""
-      }
+      },
+      "com.synconset.imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
+      },
+      "cordova-plugin-crop": {}
     },
-    "platforms": []
+    "platforms": [
+      "ios"
+    ]
   }
 }

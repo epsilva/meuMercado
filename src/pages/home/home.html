@@ -1,8 +1,41 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar hideBackButton>
+    <ion-title>
+      Lista de Compras
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="criarListaDeCompras()">
+        <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
+
+<ion-content>
+
+    <ion-item>
+        <ion-row>
+          <ion-col width-50>
+            <button ion-button color="secondary" type="button" full round large (click)="selectPhoto()">
+                        <ion-icon name="md-image"></ion-icon>
+                    </button>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <img class="img-responsive" src="{{ myPhotoURL }}" />
+      </ion-item>
+
+</ion-content>
+
+
+
+
+
+
+
+
+
 
 <ion-content padding>
     <ion-list>
@@ -34,6 +67,7 @@
         </p>
    
      </ion-item>
+    </ion-content>
   <!--div class="list card animated bounceInLeft">  
     <div class="item item-divider">Recent Updates</div>
     <div class="item item-body">
@@ -57,5 +91,5 @@
         You have <b>29</b> meetings on your calendar tomorrow.
       </div>
     </div>
-  </div-->  
-</ion-content>
+  </div>  
+</ion-content-->

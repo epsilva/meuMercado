@@ -4,9 +4,8 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header id="ion-header">
     <ion-navbar>
-      <ion-title>Produto</ion-title>
       <ion-buttons start *ngIf="usuario.isMercado">
         <button ion-button icon-only (click)="limparCampos()">
           <ion-icon name="trash-outline"></ion-icon>
@@ -18,15 +17,25 @@
         </button>
       </ion-buttons>
     </ion-navbar>
+    <ion-item scroll-hide-translate no-lines class="item-header-color">
+      <ion-thumbnail item-start>
+        <img [src]="produto.foto" class="img-bordas-avatar" (click)="presentActionSheet()">
+      </ion-thumbnail>
+      <ion-item no-lines class="item-header-color">
+          <h1 class="item-h1-style">{{produto.nome}}</h1>
+      </ion-item>
+      <ion-icon item-end *ngIf="!isMostrarImg" ios="ios-arrow-down" md="md-arrow-down"(click)="mostrarImagem('fadeInDown')"></ion-icon>
+      <ion-icon item-end *ngIf="isMostrarImg" ios="ios-arrow-up" md="md-arrow-up"(click)="mostrarImagem('fadeOutUp')"></ion-icon>
+    </ion-item>
   </ion-header>
       
   
-      <ion-content padding>
+      <ion-content padding [scroll-hide]="viewCtrl">
         <div *ngIf="usuario.isMercado">
           <form [formGroup]="produtoForm">
-            <ion-card>
-              <ion-card-content (click)="tirarFoto()">
-                <img [src]="produto.foto"  class="img-bordas"/>
+            <ion-card *ngIf="isMostrarImg" [ngClass]="cssClass">
+              <ion-card-content>
+                <img [src]="produto.foto" class="img-responsive" />
               </ion-card-content>
             </ion-card>      
             <ion-list>
@@ -40,11 +49,11 @@
                 </ion-item>
               <ion-item>
                 <ion-label color="primary" floating>Nome</ion-label>
-                <ion-input name="nome" type="text" [(ngModel)]="produto.nome" [disabled]="!usuario.isMercado" formControlName="nome" clearInput></ion-input>
+                <ion-input name="nome" type="text" maxLength="12" [(ngModel)]="produto.nome" [disabled]="!usuario.isMercado" formControlName="nome" clearInput></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label color="primary" floating>Descrição</ion-label>
-                <ion-input name="desc" type="text" [(ngModel)]="produto.desc" [disabled]="!usuario.isMercado" formControlName="desc" clearInput></ion-input>
+                <ion-textarea #myInput name="desc" id="myInput" rows="1" [disabled]="!usuario.isMercado" maxLength="500" (keyup)="resize()" formControlName="desc" [(ngModel)]="produto.des" clearInput></ion-textarea>
               </ion-item>
               <ion-item>
                 <ion-label color="primary" floating>Valor (R$)</ion-label>
