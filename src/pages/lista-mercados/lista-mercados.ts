@@ -43,17 +43,15 @@ export class ListaMercadosPage {
               snapshot.forEach((element) => {
               let el = element.val();
               innerArray.push(el);
-              loader.dismiss().then(() => {
-                this.mercados = innerArray;
-                this.mercadosCache = innerArray;
-              });
+              this.mercados = innerArray;
+              this.mercadosCache = innerArray;
             }); 
           });
+          loader.dismiss();
         }else{
-          loader.dismiss().then(() => {
-            console.log("Nenhum Registro Encontrado!!");
-            this.toastRegistroNaoEncontrado();
-          });
+          loader.dismiss();
+          console.log("Nenhum Registro Encontrado!!");
+          this.toastRegistroNaoEncontrado();
         }
       });
     }); 

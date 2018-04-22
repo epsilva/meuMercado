@@ -1,36 +1,40 @@
 <ion-header>
     <ion-navbar hideBackButton>
-      <ion-title>
-        Cadastro de Lista de Compras
-      </ion-title>
     <ion-buttons>
       <button ion-button navPop icon-only>
         <ion-icon ios="ios-arrow-dropleft" md="md-arrow-dropleft"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-item scroll-hide-translate no-lines class="item-header-color">
+    <ion-item no-lines class="item-header-color">
+      <h1 class="item-h1-style">Lista de Compras</h1>
+    </ion-item>
+  </ion-item>
 </ion-header>
 
 
-<ion-content>
-  <ion-list-header>
-    Produtos
-  </ion-list-header>
+<ion-content [scroll-hide]="viewCtrl" class="outer-content">
   <ion-list>
-      <div *ngFor="let itemGrp of mercados">
-
+      <div *ngFor="let mercado of mercados">
         <div class="item item-divider">
-          {{itemGrp.nome}}
-        </div>                                                           
-
-      <ion-item *ngFor="let item of itemGrp.produtos">
-         {{ item }}
-          <span class="item-note">
-          some value
-          </span>
-      </ion-item>
-
+          <ion-item no-lines class="iten-div-color">
+            <ion-avatar item-start>
+              <img [src]="mercado.foto">
+            </ion-avatar>
+            <h2>{{mercado.nome}}</h2>
+            <ion-icon item-end *ngIf="!mercado.showDetalhes" ios="ios-arrow-down" md="md-arrow-down"(click)="showDetalhes(mercado)"></ion-icon>
+            <ion-icon item-end *ngIf="mercado.showDetalhes" ios="ios-arrow-up" md="md-arrow-up"(click)="showDetalhes(mercado)"></ion-icon>
+          </ion-item>
+        </div>                  
+        <div *ngIf="mercado.showDetalhes">
+          <ion-item *ngFor="let produto of mercado.produtos" [ngClass]="mercado.effect">
+            <ion-thumbnail item-start>
+                <img [src]="produto.foto" class="img-bordas">
+            </ion-thumbnail>
+            <produto-mercado-lista [produto]="produto"></produto-mercado-lista>
+          </ion-item>
+      </div>                                         
       </div>
-
     </ion-list>
 </ion-content>

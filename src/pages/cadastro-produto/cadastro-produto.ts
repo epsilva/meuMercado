@@ -84,7 +84,7 @@ export class CadastroProdutoPage {
     this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL,
-      quality: 100,
+      quality: 1,
       encodingType: this.camera.EncodingType.PNG,
     }).then(imageData => {
       this.myPhoto = imageData;

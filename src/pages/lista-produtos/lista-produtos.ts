@@ -85,10 +85,14 @@ export class ListaProdutosPage {
 
   pesquisarItens(ev: any) {
     this.produtos = this.produtosCache;
-    let val = ev.target.value;
+    let val:string = ev.target.value;
+    console.log(val);
     if (val && val.trim() != '') {
       this.produtos = this.produtos.filter((item) => {
-        return (item.nome.toLowerCase().indexOf(val.toLowerCase()) > -1) || (item.desc.toLowerCase().indexOf(val.toLowerCase()) > -1) ;
+        let produto:Produto = item;
+        console.log(produto.nome);
+        console.log(produto.nome.toLocaleLowerCase());
+        return (produto.nome.toLowerCase().indexOf(val.toLowerCase()) > -1);// || (produto.desc.toLowerCase().indexOf(val.toLowerCase()) > -1) ;
       });
     }
   }

@@ -42,12 +42,10 @@ export class DataServiceProvider {
   registrar(produto: Produto) {
     let mercado:Mercado = this.loginProvider.currentUser;
     mercado.produtos = new Array<Produto>();
-    this.reference.child(this.loginProvider.currentUser.id + '/' + produto.plu).update(produto);
+    this.reference.child(this.loginProvider.currentUser.id).child(produto.plu).update(produto);
     this.referenceProduto = firebase.database().ref("/produto-geral/"+mercado.id+"/");
     return firebase.database().ref('/produto/' + this.loginProvider.currentUser.id).once("value", (snapshot) => {
-      snapshot.val().forEach(element => {
-        mercado.produtos.push(element);
-      });
+      mercado.produtos = snapshot.val();
       this.referenceProduto.update(mercado);
     });
   }

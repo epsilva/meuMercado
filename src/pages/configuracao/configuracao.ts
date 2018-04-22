@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, AlertController, LoadingController, ActionSheetButton, ActionSheetController } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login/login';
 import { Usuario } from '../../models/usuario';
 import { LoginPage } from '../login/login';
@@ -24,9 +24,78 @@ export class ConfiguracaoPage {
   usuario:Mercado = new Mercado();
   imageSrc: string;
 
-  constructor(public loadingController: LoadingController, public camera:Camera, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public app:App) {
+  public myPhotosRef: any;
+  public myPhoto: any;
+  public myPhotoURL: any;
+
+  constructor(public actionSheetCtrl: ActionSheetController, public loadingController: LoadingController, public camera:Camera, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public loginProvider: LoginProvider, public app:App) {
     this.usuario = loginProvider.currentUser;
-    
+    this.myPhotosRef = firebase.storage().ref('/Fotos/Usuarios');
+  }
+
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Escolha ou tire uma Foto',
+      buttons: [
+        {
+          text: 'Tire uma Foto',
+          handler: () => {
+            this.tirarFoto();
+          }
+        },
+        {
+          text: 'Escolha uma Foto',
+          handler: () => {
+            this.adicionarImgProduto();
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  adicionarImgProduto(){
+    this.camera.getPicture({
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      quality: 1,
+      encodingType: this.camera.EncodingType.JPEG,
+    }).then(imageData => {
+      this.myPhoto = imageData;
+      this.upload();
+    }, error => {
+      console.log("ERROR -> " + JSON.stringify(error));
+    });
+  }
+
+  private upload(): void {
+    let loader = this.loadingController.create({
+      cssClass: 'transparent'
+    });  
+    loader.present().then(() => {
+      const filename = Math.floor(Date.now() / 1000);
+      this.myPhotosRef.child(this.generateUUID()).child(filename+'.png')
+      .putString(this.myPhoto, 'base64', { contentType: 'image/png' })
+      .then((savedPicture) => {
+        this.usuario.foto = savedPicture.downloadURL;
+        let usuarioComum:Usuario = this.usuario;
+        firebase.database().ref('/usuario/' + this.loginProvider.currentUser.id+'/').update(usuarioComum).then(sucess => {
+          if(this.usuario.isMercado){
+              firebase.database().ref('/mercado/' + this.loginProvider.currentUser.id+'/').update(this.usuario);  
+          }
+          loader.dismiss();
+        }).catch(error => {
+          loader.dismiss();
+          this.alerta('Falha', 'Erro vincular imagem ao usuário!');
+          console.log(error);
+        });
+      })
+    });
+  }
+
+  private generateUUID(): any {
+    var d = new Date().getTime();
+    return this.loginProvider.currentUser.id;
   }
 
   sair(){
@@ -53,7 +122,7 @@ export class ConfiguracaoPage {
       }
 
       this.camera.getPicture(options).then((imageData) => {
-        this.imageSrc = 'data:image/jpeg;base64,' + imageData;
+        this.myPhoto = imageData;
         this.upload();
       })
       .catch((erro) => {
@@ -62,7 +131,7 @@ export class ConfiguracaoPage {
       })
   }
 
-  upload() { 
+  /*upload() { 
     let storageRef = firebase.storage().ref();
     const filename = Math.floor(Date.now() / 1000);
     const imageRef = storageRef.child('images/users/'+filename+'.jpg');
@@ -112,7 +181,7 @@ export class ConfiguracaoPage {
       });
     });
 
-  }
+  }*/
 
   private alerta(titulo: string, mensagem: string) {
     let alert = this.alertCtrl.create({

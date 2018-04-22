@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { CadastroListaComprasPage } from '../cadastro-lista-compras/cadastro-lista-compras';
 import firebase from 'firebase';
 import { Camera } from '@ionic-native/camera';
+import { Usuario } from '../../models/usuario';
+import { LoginProvider } from '../../providers/login/login';
 
 @Component({
   selector: 'page-home',
@@ -16,9 +18,15 @@ export class HomePage {
   public myPhotosRef: any;
   public myPhoto: any;
   public myPhotoURL: any;
+  public usuario:Usuario;
 
-  constructor(public camera:Camera, public navCtrl: NavController) {
+  constructor(public camera:Camera, public navCtrl: NavController, public loginProvider:LoginProvider) {
     this.myPhotosRef = firebase.storage().ref('/Photos/');
+    this.usuario = new Usuario()
+  }
+
+  ionViewDidLoad(){
+    this.usuario = this.loginProvider.currentUser;
   }
 
   criarListaDeCompras(){

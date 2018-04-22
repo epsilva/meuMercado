@@ -6,4 +6,6 @@ export class Mercado extends Usuario {
     razaoSocial:String;
     nomeMercado:String;
     produtos:Array<Produto> = new Array<Produto>();
+    showDetalhes:boolean = false;
+    effect:string;
 }

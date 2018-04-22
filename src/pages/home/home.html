@@ -4,14 +4,16 @@
       Lista de Compras
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="criarListaDeCompras()">
+      <button ion-button icon-only *ngIf="!usuario.isMercado" (click)="criarListaDeCompras()">
         <ion-icon ios="ios-add-circle-outline" md="md-add-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content></ion-content>
+
+<!--ion-content>
 
     <ion-item>
         <ion-row>
@@ -26,7 +28,7 @@
         <img class="img-responsive" src="{{ myPhotoURL }}" />
       </ion-item>
 
-</ion-content>
+</ion-content-->
 
 
 
@@ -37,7 +39,7 @@
 
 
 
-<ion-content padding>
+<!--ion-content padding>
     <ion-list>
         <ion-item>
           <ion-label>Select an effect</ion-label>
@@ -67,7 +69,7 @@
         </p>
    
      </ion-item>
-    </ion-content>
+    </ion-content-->
   <!--div class="list card animated bounceInLeft">  
     <div class="item item-divider">Recent Updates</div>
     <div class="item item-body">

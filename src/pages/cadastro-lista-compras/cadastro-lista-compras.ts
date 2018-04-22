@@ -1,9 +1,10 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
 import { Produto } from '../../models/produto';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 import { Mercado } from '../../models/mercado';
 import { MercadoProvider } from '../../providers/mercado/mercado';
+import { timeout } from 'rxjs/operator/timeout';
 
 @IonicPage()
 @Component({
@@ -16,6 +17,8 @@ export class CadastroListaComprasPage {
   produtosCache: Array<Produto>;
   public mercados: Array<Mercado>;
   lista: Array<any>;
+  effect : any;
+  cssClass : string;
 
   public itemsList = [
     {"name":"Mark", "position":"CEO"},
@@ -23,7 +26,7 @@ export class CadastroListaComprasPage {
   ];
 
 
-  constructor(public mercadoProvider:MercadoProvider, public ngZone: NgZone, public loadingController: LoadingController, public produtoProvider: DataServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public viewCtrl: ViewController, public mercadoProvider:MercadoProvider, public ngZone: NgZone, public loadingController: LoadingController, public produtoProvider: DataServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.produtos = new Array<Produto>();
     this.produtosCache = new Array<Produto>();
     this.mercados = new Array<Mercado>();
@@ -33,7 +36,7 @@ export class CadastroListaComprasPage {
     //this.loadEvent();
     console.log("ionViewWillLoad");
     let loader = this.loadingController.create({
-      content: "Pesquisando produtos!"
+      cssClass: 'transparent'
     }); 
     loader.present().then(() => {
       this.produtoProvider.referenceProduto.on('value', (snapshot) => {
@@ -47,9 +50,7 @@ export class CadastroListaComprasPage {
               innerArray.push(el);
             });
             loader.dismiss().then(() => {
-              //this.recuperaProdutos(innerArray);
               this.mercados = innerArray;
-              //this.produtosCache = innerArray;
             });            
           });
         }
@@ -107,6 +108,18 @@ export class CadastroListaComprasPage {
         }
       });
     });
+  }
+
+  showDetalhes(mercado:Mercado){
+    if (mercado.showDetalhes) {
+      mercado.effect = "animated fadeOutUp";
+      setTimeout(() => {
+        mercado.showDetalhes = false;
+      }, 500);
+    } else {
+      mercado.showDetalhes = true;
+      mercado.effect = "animated fadeInDown";
+    }
   }
 
   selecionado(produto:Mercado){
